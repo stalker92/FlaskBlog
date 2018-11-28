@@ -70,7 +70,7 @@ def account():
 
 
 @users.route('/reset_password', methods=['GET', 'POST'])
-def reset_request():
+def password_reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RequestPasswordResetForm()
@@ -79,11 +79,11 @@ def reset_request():
         send_reset_email(user)
         flash('An email has been sent with instructions to reset your password.', 'success')
         return redirect(url_for('users.login'))
-    return render_template('users.reset_request.html', title='Reset Password', form=form)
+    return render_template('users/password_reset_request.html', title='Reset Password', form=form)
 
 
 @users.route('/reset_password/<string:token>', methods=['GET', 'POST'])
-def reset_token(token):
+def password_reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
     user = User.verify_reset_token(token)
@@ -97,7 +97,7 @@ def reset_token(token):
         db.session.commit()
         flash('Your password has been changed. You are now able to log in.', 'success')
         return redirect(url_for('users.login'))
-    return render_template('users/reset_password.html', title='Reset Password', form=form)
+    return render_template('users/password_reset.html', title='Reset Password', form=form)
 
 
 @users.route("/user/<string:username>")

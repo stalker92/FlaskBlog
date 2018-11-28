@@ -1,6 +1,6 @@
 import os
 import secrets
-from flask import current_app
+from flask import current_app, url_for
 from flask_mail import Message
 from PIL import Image
 from flaskblog import mail
@@ -23,7 +23,7 @@ def send_reset_email(user):
     msg = Message('FlaskBlog - Password Reset Request', sender='noreply@demo.com',
                   recipients=[user.email])
     msg.body = f'''To reset your password, visit the following link:
-{url_for('reset_token', token=token, _external=True)}
+{url_for('users.password_reset_token', token=token, _external=True)}
 
 If you did not make this request, simply ignore this email.'''
     mail.send(msg)
