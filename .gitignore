@@ -102,3 +102,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Local DB
+site.db
+
+# Local uploads
+static/users/profile_pics
+!static/users/profile_pics/default.jpg
