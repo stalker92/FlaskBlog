@@ -21,6 +21,7 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+    migrate.init_app(app, db)
 
     from flaskblog.errors.handlers import errors
     from flaskblog.main.routes import main
